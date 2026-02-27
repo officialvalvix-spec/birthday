@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Dear Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --blush:#FFB6C1;
+  --petal:#FF85A1;
+  --rose:#E8456A;
+  --deeprose:#C2185B;
+  --cream:#FFF5F7;
+  --ivory:#FFF9FB;
+  --sage:#B5D5C5;
+  --gold:#F4C87E;
+  --lilac:#E8C5E5;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--ivory);
+  font-family:'Cormorant Garamond',serif;
+  overflow-x:hidden;
+  cursor:none;
+  min-height:100vh;
+}
+
+/* CURSOR */
+#cur{
+  position:fixed;width:14px;height:14px;
+  background:var(--rose);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 20px var(--petal);
+}
+#cur2{
+  position:fixed;width:40px;height:40px;
+  border:1.5px solid var(--petal);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:.6;
+}
+
+/* BG GRADIENT */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, #FFD6E0 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, #FADADD 0%, transparent 50%),
+    radial-gradient(ellipse 70% 70% at 50% 80%, #F8C8D4 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 90%, #E8C5E5 0%, transparent 55%),
+    linear-gradient(160deg, #FFF0F5 0%, #FFF5EE 40%, #FDF0F8 100%);
+  animation:bgPulse 8s ease-in-out infinite;
+}
+@keyframes bgPulse{0%,100%{opacity:1}50%{opacity:.88}}
+
+/* PETALS FALLING */
+.petals-wrap{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.petal{
+  position:absolute;top:-60px;
+  animation:petalFall linear infinite;
+  opacity:0;
+}
+@keyframes petalFall{
+  0%{transform:translateY(0) rotateZ(0);opacity:0}
+  5%{opacity:1}
+  95%{opacity:.8}
+  100%{transform:translateY(110vh) rotateZ(720deg);opacity:0}
+}
+
+/* BUTTERFLIES */
+.butterfly{
+  position:fixed;font-size:28px;
+  pointer-events:none;z-index:5;
+  animation:flyPath 14s ease-in-out infinite;
+  filter:drop-shadow(0 4px 8px rgba(200,80,120,.2));
+}
+.butterfly:nth-child(1){top:12%;left:6%;animation-delay:0s;animation-duration:16s;font-size:34px}
+.butterfly:nth-child(2){top:62%;right:5%;animation-delay:-5s;animation-duration:18s}
+.butterfly:nth-child(3){top:78%;left:12%;animation-delay:-9s;animation-duration:13s;font-size:22px}
+.butterfly:nth-child(4){top:28%;right:10%;animation-delay:-3s;animation-duration:20s;font-size:26px}
+@keyframes flyPath{
+  0%{transform:translate(0,0) scaleX(1) rotate(-5deg)}
+  20%{transform:translate(60px,-40px) scaleX(-1) rotate(5deg)}
+  40%{transform:translate(30px,-80px) scaleX(1) rotate(-3deg)}
+  60%{transform:translate(-50px,-50px) scaleX(-1) rotate(8deg)}
+  80%{transform:translate(-80px,20px) scaleX(1) rotate(-5deg)}
+  100%{transform:translate(0,0) scaleX(1) rotate(-5deg)}
+}
+
+/* LAYOUT */
+.scene{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px 50px;
+  gap:0;
+}
+
+/* TOP ARCH */
+.floral-arch{
+  text-align:center;
+  font-size:clamp(36px,7vw,72px);
+  letter-spacing:-2px;
+  line-height:1;
+  opacity:0;
+  animation:dropIn .8s cubic-bezier(.34,1.56,.64,1) forwards .3s;
+  user-select:none;
+  margin-bottom:12px;
+}
+@keyframes dropIn{
+  from{opacity:0;transform:translateY(-40px) scale(.8)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* HAPPY */
+.word-happy{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(68px,16vw,180px);
+  color:var(--rose);
+  line-height:.95;
+  opacity:0;
+  animation:swoopLeft 1s cubic-bezier(.22,1,.36,1) forwards .7s;
+  filter:drop-shadow(0 6px 28px rgba(232,69,106,.28));
+}
+@keyframes swoopLeft{
+  from{opacity:0;transform:translateX(-80px) rotate(-8deg)}
+  to{opacity:1;transform:translateX(0) rotate(0)}
+}
+
+/* BIRTHDAY */
+.word-birthday{
+  font-family:'Pinyon Script',cursive;
+  font-size:clamp(56px,13vw,150px);
+  color:var(--deeprose);
+  line-height:.9;
+  opacity:0;
+  animation:swoopRight 1s cubic-bezier(.22,1,.36,1) forwards 1s;
+  filter:drop-shadow(0 4px 20px rgba(194,24,91,.2));
+  letter-spacing:2px;
+  margin-top:-16px;
+}
+@keyframes swoopRight{
+  from{opacity:0;transform:translateX(80px) rotate(6deg)}
+  to{opacity:1;transform:translateX(0) rotate(0)}
+}
+
+/* DEAR FRIEND */
+.word-dear{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:10px;
+  opacity:0;
+  animation:fadeScale 1s ease forwards 1.4s;
+}
+.dear-line{width:55px;height:1px;background:linear-gradient(90deg,transparent,var(--petal))}
+.dear-line.r{background:linear-gradient(90deg,var(--petal),transparent)}
+.dear-text{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(18px,3.5vw,36px);
+  color:var(--deeprose);
+  letter-spacing:.35em;
+  text-transform:uppercase;
+}
+@keyframes fadeScale{
+  from{opacity:0;transform:scale(.85)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* SEPARATOR */
+.sep{
+  font-size:clamp(20px,3.5vw,32px);
+  margin:22px 0 18px;
+  letter-spacing:6px;
+  opacity:0;
+  animation:fadeScale 1s ease forwards 1.8s;
+  line-height:1;
+}
+
+/* WISHES */
+.wishes{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  max-width:660px;
+  width:100%;
+}
+.wish{
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,182,193,.45);
+  border-radius:100px;
+  padding:15px 34px;
+  font-size:clamp(13px,2vw,17px);
+  font-weight:300;
+  color:#7B2D45;
+  line-height:1.65;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(30px);
+  box-shadow:0 8px 32px rgba(232,69,106,.09),inset 0 1px 0 rgba(255,255,255,.85);
+}
+.wish::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,182,193,.12),rgba(232,197,229,.12));
+  border-radius:inherit;
+}
+.wish i{color:var(--rose);font-style:italic;font-weight:400}
+.wish.show{animation:wishIn .7s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes wishIn{to{opacity:1;transform:translateY(0)}}
+
+/* BOTTOM FLOWERS */
+.bottom-flowers{
+  text-align:center;
+  font-size:clamp(32px,6vw,65px);
+  padding-top:28px;
+  letter-spacing:-2px;
+  opacity:0;
+  animation:fadeScale 1s ease forwards 3.6s;
+  line-height:1;
+}
+
+/* GLITTER CANVAS */
+#glitter{position:fixed;inset:0;z-index:3;pointer-events:none}
+
+/* SPARKLE */
+.sparkle{
+  position:fixed;pointer-events:none;z-index:6;
+  animation:sparklePop .9s ease-out forwards;
+  font-size:16px;
+}
+@keyframes sparklePop{
+  0%{transform:scale(0) rotate(0);opacity:1}
+  50%{transform:scale(1.5) rotate(180deg);opacity:1}
+  100%{transform:scale(0) rotate(360deg);opacity:0}
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;pointer-events:none;z-index:4;
+  animation:heartRise linear infinite;opacity:0;
+}
+@keyframes heartRise{
+  0%{transform:translateY(0) scale(0);opacity:0}
+  10%{opacity:.9;transform:translateY(-30px) scale(1)}
+  100%{transform:translateY(-260px) scale(.2);opacity:0}
+}
+
+@media(max-width:480px){
+  .wish{border-radius:20px;padding:13px 22px}
+  .dear-line{width:28px}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+<div class="bg"></div>
+
+<div class="butterfly">🦋</div>
+<div class="butterfly">🦋</div>
+<div class="butterfly">🦋</div>
+<div class="butterfly">🦋</div>
+
+<div class="petals-wrap" id="petals"></div>
+<canvas id="glitter"></canvas>
+
+<div class="scene">
+  <div class="floral-arch">🌸🌺🌹🌷🌸🌺🌹🌷🌸</div>
+
+  <div class="word-happy">Happy</div>
+  <div class="word-birthday">Birthday</div>
+
+  <div class="word-dear">
+    <div class="dear-line"></div>
+    <span class="dear-text">Dear Ruchita</span>
+    <div class="dear-line r"></div>
+  </div>
+
+  <div class="sep">🌸 ✿ 🌸 ✿ 🌸</div>
+
+  <div class="wishes" id="wishes">
+    <div class="wish">🌹 May your day bloom with <i>joy and laughter</i>, as beautiful as the rarest flower in spring.</div>
+    <div class="wish">🦋 Like a butterfly, may you <i>soar freely</i> into this new year — full of wonder, grace, and magic.</div>
+    <div class="wish">✨ You deserve every beautiful thing life offers — <i>love, peace, and endless happiness</i>, today and always.</div>
+    <div class="wish">💐 Wishing you a life overflowing with <i>warm moments and gentle blessings</i> that take your breath away.</div>
+  </div>
+
+  <div class="bottom-flowers">🌷🌹🌺🌸🌼🌸🌺🌹🌷</div>
+</div>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=window.innerWidth/2,my=window.innerHeight/2,tx=mx,ty=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function animCur(){
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  tx+=(mx-tx)*.1;ty+=(my-ty)*.1;
+  cur2.style.left=tx+'px';cur2.style.top=ty+'px';
+  requestAnimationFrame(animCur);
+})();
+
+// Falling petals
+const petalEmoji=['🌸','🌺','🌹','🌷','✿','❀','🌼'];
+const wrap=document.getElementById('petals');
+for(let i=0;i<45;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=petalEmoji[Math.floor(Math.random()*petalEmoji.length)];
+  p.style.cssText=`left:${Math.random()*100}%;font-size:${Math.random()*14+10}px;animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*10}s;`;
+  wrap.appendChild(p);
+}
+
+// Glitter canvas
+const canvas=document.getElementById('glitter');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const gcols=['#FFB6C1','#FF85A1','#E8456A','#F4C87E','#E8C5E5','#fff'];
+const glitters=Array.from({length:90},()=>({
+  x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
+  r:Math.random()*2+.4,col:gcols[Math.floor(Math.random()*gcols.length)],
+  sp:Math.random()*.4+.2,phase:Math.random()*Math.PI*2
+}));
+(function drawG(t=0){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  glitters.forEach(g=>{
+    const op=.25+.55*Math.abs(Math.sin(t*.001+g.phase));
+    ctx.beginPath();ctx.arc(g.x,g.y,g.r,0,Math.PI*2);
+    ctx.fillStyle=g.col;ctx.globalAlpha=op;ctx.fill();
+    g.y+=g.sp;if(g.y>canvas.height+5){g.y=-10;g.x=Math.random()*canvas.width;}
+  });
+  ctx.globalAlpha=1;
+  requestAnimationFrame(t=>drawG(t));
+})();
+
+// Staggered wishes
+document.querySelectorAll('.wish').forEach((w,i)=>{
+  setTimeout(()=>w.classList.add('show'),2100+i*320);
+});
+
+// Click effects
+const sparkSyms=['✨','💫','🌸','⭐','💕','🌺','🌼'];
+const heartSyms=['💗','💖','💕','🌸','💓','🌺'];
+document.addEventListener('click',e=>{
+  for(let i=0;i<7;i++){
+    const s=document.createElement('div');
+    s.className='sparkle';
+    s.textContent=sparkSyms[Math.floor(Math.random()*sparkSyms.length)];
+    s.style.cssText=`left:${e.clientX+Math.random()*70-35}px;top:${e.clientY+Math.random()*70-35}px;font-size:${Math.random()*14+12}px;animation-delay:${i*.06}s`;
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1000);
+  }
+  for(let i=0;i<5;i++){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.textContent=heartSyms[Math.floor(Math.random()*heartSyms.length)];
+    h.style.cssText=`left:${e.clientX+Math.random()*50-25}px;top:${e.clientY}px;animation-duration:${Math.random()*1.5+1.5}s;animation-delay:${i*.08}s;font-size:${Math.random()*10+12}px`;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3500);
+  }
+});
+
+// Auto hearts
+function autoHeart(){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.textContent=heartSyms[Math.floor(Math.random()*heartSyms.length)];
+  h.style.left=Math.random()*100+'vw';
+  h.style.top='95vh';
+  h.style.fontSize=Math.random()*12+10+'px';
+  h.style.animationDuration=Math.random()*2+2+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4500);
+  setTimeout(autoHeart,Math.random()*500+300);
+}
+setTimeout(autoHeart,2800);
+</script>
+</body>
+</html>
